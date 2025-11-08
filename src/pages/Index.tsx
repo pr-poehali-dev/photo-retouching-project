@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 const Index = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const { toast } = useToast();
 
   const scrollToSection = (id: string) => {
@@ -24,6 +25,18 @@ const Index = () => {
       description: "Мы свяжемся с вами в течение 30 минут",
     });
     setFormData({ name: "", phone: "", message: "" });
+    setUploadedFiles([]);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      setUploadedFiles(prev => [...prev, ...files]);
+    }
+  };
+
+  const removeFile = (index: number) => {
+    setUploadedFiles(prev => prev.filter((_, i) => i !== index));
   };
 
   return (
@@ -422,6 +435,43 @@ const Index = () => {
                       required
                       className="w-full min-h-[120px]"
                     />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Загрузите фотографии</label>
+                    <div className="space-y-3">
+                      <div className="relative">
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          onChange={handleFileChange}
+                          className="w-full cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+                        />
+                      </div>
+                      {uploadedFiles.length > 0 && (
+                        <div className="space-y-2">
+                          {uploadedFiles.map((file, index) => (
+                            <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                              <div className="flex items-center gap-3">
+                                <Icon name="Image" size={20} className="text-primary" />
+                                <span className="text-sm font-medium truncate max-w-[200px]">{file.name}</span>
+                                <span className="text-xs text-muted-foreground">({(file.size / 1024 / 1024).toFixed(2)} МБ)</span>
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => removeFile(index)}
+                                className="text-destructive hover:text-destructive/80 transition-colors"
+                              >
+                                <Icon name="X" size={18} />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      <p className="text-xs text-muted-foreground">
+                        Вы можете загрузить несколько фотографий в форматах JPG, PNG. Максимальный размер файла 10 МБ.
+                      </p>
+                    </div>
                   </div>
                   <Button type="submit" className="w-full bg-primary hover:bg-primary/90" size="lg">
                     <Icon name="Send" size={20} className="mr-2" />
