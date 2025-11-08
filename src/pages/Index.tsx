@@ -224,8 +224,8 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="animate-fade-in">
               <BeforeAfterSlider
-                beforeImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/713deeaa-d3eb-4a73-b432-ed8185101ce7.jpg"
-                afterImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/adfbf611-bcfb-4ec7-b9d0-9ffd373a96d3.jpg"
+                beforeImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/022a5a2b-4f0c-4503-bb69-a92a066abadc.jpg"
+                afterImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/cabee109-1d7f-4b57-96eb-dfcc402547c2.jpg"
                 beforeLabel="До реставрации"
                 afterLabel="После обработки"
               />
@@ -236,8 +236,8 @@ const Index = () => {
             </div>
             <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
               <BeforeAfterSlider
-                beforeImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/ffafbc56-1373-4e07-9a68-2355530cbbae.jpg"
-                afterImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/016c71e6-eb27-4f0e-88f3-2dcace40b6bd.jpg"
+                beforeImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/53bf807a-3ef4-4371-9353-a08cd50beb5e.jpg"
+                afterImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/61a61318-98f4-4f1d-8725-04ccf880ddf8.jpg"
                 beforeLabel="Исходное фото"
                 afterLabel="Готово для памятника"
               />
