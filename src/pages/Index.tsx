@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("services");
@@ -106,6 +107,43 @@ const Index = () => {
                     <p className="text-sm text-muted-foreground">Выполнено с 2018 года</p>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 bg-card/30">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient">До и После</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Перемещайте ползунок, чтобы увидеть результат нашей работы
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="animate-fade-in">
+              <BeforeAfterSlider
+                beforeImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/713deeaa-d3eb-4a73-b432-ed8185101ce7.jpg"
+                afterImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/adfbf611-bcfb-4ec7-b9d0-9ffd373a96d3.jpg"
+                beforeLabel="До реставрации"
+                afterLabel="После обработки"
+              />
+              <div className="mt-4 text-center">
+                <p className="font-heading font-semibold text-lg">Восстановление старого фото</p>
+                <p className="text-sm text-muted-foreground">Устранение повреждений и улучшение качества</p>
+              </div>
+            </div>
+            <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
+              <BeforeAfterSlider
+                beforeImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/ffafbc56-1373-4e07-9a68-2355530cbbae.jpg"
+                afterImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/016c71e6-eb27-4f0e-88f3-2dcace40b6bd.jpg"
+                beforeLabel="Исходное фото"
+                afterLabel="Готово для памятника"
+              />
+              <div className="mt-4 text-center">
+                <p className="font-heading font-semibold text-lg">Ретушь для гравировки</p>
+                <p className="text-sm text-muted-foreground">Профессиональная подготовка портрета</p>
               </div>
             </div>
           </div>
