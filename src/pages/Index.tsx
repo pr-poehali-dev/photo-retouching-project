@@ -2,9 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
 import { useState } from "react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("services");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -26,9 +28,44 @@ const Index = () => {
               </button>
             ))}
           </div>
-          <Button onClick={() => scrollToSection("контакты")} className="bg-primary hover:bg-primary/90">
-            Заказать
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button onClick={() => scrollToSection("контакты")} className="hidden sm:flex bg-primary hover:bg-primary/90">
+              Заказать
+            </Button>
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="md:hidden">
+                  <Icon name="Menu" size={24} />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <div className="flex flex-col gap-6 mt-8">
+                  <h2 className="text-2xl font-heading font-bold text-gradient mb-4">Меню</h2>
+                  {["Услуги", "Портфолио", "Цены", "Отзывы", "Контакты"].map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => {
+                        scrollToSection(item.toLowerCase());
+                        setMobileMenuOpen(false);
+                      }}
+                      className="text-left text-lg text-muted-foreground hover:text-primary transition-colors py-2"
+                    >
+                      {item}
+                    </button>
+                  ))}
+                  <Button 
+                    onClick={() => {
+                      scrollToSection("контакты");
+                      setMobileMenuOpen(false);
+                    }} 
+                    className="bg-primary hover:bg-primary/90 mt-4"
+                  >
+                    Заказать
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </nav>
       </header>
 
