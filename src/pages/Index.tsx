@@ -237,26 +237,26 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="animate-fade-in">
               <BeforeAfterSlider
-                beforeImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/022a5a2b-4f0c-4503-bb69-a92a066abadc.jpg"
-                afterImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/cabee109-1d7f-4b57-96eb-dfcc402547c2.jpg"
+                beforeImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/41965485-0e59-4173-aed2-0d6061a11e2a.jpg"
+                afterImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/d77448db-9a92-49a3-b6c3-a02ab3de67d5.jpg"
                 beforeLabel="До реставрации"
                 afterLabel="После обработки"
               />
               <div className="mt-4 text-center">
                 <p className="font-heading font-semibold text-lg">Восстановление старого фото</p>
-                <p className="text-sm text-muted-foreground">Устранение повреждений и улучшение качества</p>
+                <p className="text-sm text-muted-foreground">Устранение трещин, разрывов и пятен</p>
               </div>
             </div>
             <div className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
               <BeforeAfterSlider
-                beforeImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/53bf807a-3ef4-4371-9353-a08cd50beb5e.jpg"
-                afterImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/61a61318-98f4-4f1d-8725-04ccf880ddf8.jpg"
-                beforeLabel="Исходное фото"
+                beforeImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/281f2e03-b223-4004-95e2-ad4ed54c40eb.jpg"
+                afterImage="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/23b2206f-0fc2-487d-a939-bbf8dff68dd2.jpg"
+                beforeLabel="Старое выцветшее фото"
                 afterLabel="Готово для памятника"
               />
               <div className="mt-4 text-center">
                 <p className="font-heading font-semibold text-lg">Ретушь для гравировки</p>
-                <p className="text-sm text-muted-foreground">Профессиональная подготовка портрета</p>
+                <p className="text-sm text-muted-foreground">Восстановление и подготовка для памятника</p>
               </div>
             </div>
           </div>
