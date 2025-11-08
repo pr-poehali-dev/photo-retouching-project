@@ -32,7 +32,7 @@ const Index = () => {
         <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-heading font-bold text-gradient">PhotoMemory</h1>
           <div className="hidden md:flex gap-6">
-            {["Услуги", "Портфолио", "Цены", "Контакты"].map((item) => (
+            {["Услуги", "Портфолио", "Отзывы", "Цены", "Контакты"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -55,7 +55,7 @@ const Index = () => {
               <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                 <div className="flex flex-col gap-6 mt-8">
                   <h2 className="text-2xl font-heading font-bold text-gradient mb-4">Меню</h2>
-                  {["Услуги", "Портфолио", "Цены", "Контакты"].map((item) => (
+                  {["Услуги", "Портфолио", "Отзывы", "Цены", "Контакты"].map((item) => (
                     <button
                       key={item}
                       onClick={() => {
@@ -311,7 +311,75 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="контакты" className="py-20 px-4">
+      <section id="отзывы" className="py-20 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient">Отзывы клиентов</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Благодарности от людей, которые доверили нам сохранение светлой памяти о близких
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                name: "Елена Михайловна",
+                date: "15 октября 2024",
+                rating: 5,
+                text: "Огромное спасибо за проделанную работу! Восстановили очень старое фото моей бабушки для памятника. Результат превзошёл все ожидания. Очень бережно и профессионально.",
+              },
+              {
+                name: "Андрей Васильев",
+                date: "3 ноября 2024",
+                rating: 5,
+                text: "Заказывал ретушь фото для гранитного памятника. Сделали быстро, всего за день. Качество отличное, на граните получилось очень чётко. Рекомендую!",
+              },
+              {
+                name: "Ольга Сергеевна",
+                date: "28 октября 2024",
+                rating: 5,
+                text: "Делала видео из фотографий для поминок отца. Получилось очень трогательно и красиво. Все гости плакали. Спасибо вам за вашу работу и понимание.",
+              },
+              {
+                name: "Дмитрий К.",
+                date: "12 ноября 2024",
+                rating: 5,
+                text: "Профессиональный подход! Восстановили повреждённое фото деда 1950-х годов. Убрали все царапины и разрывы. Теперь снимок как новый. Очень доволен!",
+              },
+              {
+                name: "Мария Ивановна",
+                date: "20 октября 2024",
+                rating: 5,
+                text: "Заказывала обработку для металлокерамики. Мастер учёл все нюансы печати, цвета получились естественные. Работа выполнена в срок, цена адекватная.",
+              },
+              {
+                name: "Виктор П.",
+                date: "8 ноября 2024",
+                rating: 5,
+                text: "Отличная работа! У нас было только старое, размытое фото. Сделали его чётким для памятника. Корректировки внесли бесплатно. Большое спасибо за терпение!",
+              },
+            ].map((review, index) => (
+              <Card key={index} className="hover-lift">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h3 className="font-heading font-semibold text-lg">{review.name}</h3>
+                      <p className="text-sm text-muted-foreground">{review.date}</p>
+                    </div>
+                    <div className="flex gap-1">
+                      {Array.from({ length: review.rating }).map((_, i) => (
+                        <Icon key={i} name="Star" size={16} className="text-secondary fill-secondary" />
+                      ))}
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">{review.text}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="контакты" className="py-20 px-4 bg-card/30">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient">Оставьте заявку</h2>
