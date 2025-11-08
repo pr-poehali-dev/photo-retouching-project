@@ -4,13 +4,26 @@ import Icon from "@/components/ui/icon";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState("services");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
+  const { toast } = useToast();
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast({
+      title: "Заявка отправлена!",
+      description: "Мы свяжемся с вами в течение 30 минут",
+    });
+    setFormData({ name: "", phone: "", message: "" });
   };
 
   return (
@@ -19,7 +32,7 @@ const Index = () => {
         <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-heading font-bold text-gradient">PhotoMemory</h1>
           <div className="hidden md:flex gap-6">
-            {["Услуги", "Портфолио", "Цены", "Отзывы", "Контакты"].map((item) => (
+            {["Услуги", "Портфолио", "Цены", "Контакты"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -42,7 +55,7 @@ const Index = () => {
               <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                 <div className="flex flex-col gap-6 mt-8">
                   <h2 className="text-2xl font-heading font-bold text-gradient mb-4">Меню</h2>
-                  {["Услуги", "Портфолио", "Цены", "Отзывы", "Контакты"].map((item) => (
+                  {["Услуги", "Портфолио", "Цены", "Контакты"].map((item) => (
                     <button
                       key={item}
                       onClick={() => {
@@ -74,46 +87,133 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
+              <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
+                <p className="text-primary font-semibold text-sm">⭐ Опыт работы с 2018 года</p>
+              </div>
               <h2 className="text-5xl md:text-6xl font-heading font-bold mb-6 leading-tight">
-                Вернём жизнь <span className="text-gradient">вашим фотографиям</span>
+                Сохраним светлую <span className="text-gradient">память навсегда</span>
               </h2>
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                Профессиональная ретушь фото для памятников, восстановление старых снимков и создание видео-воспоминаний
+                Профессиональная ретушь фото для памятников, восстановление старых снимков и создание видео-воспоминаний. Бережно работаем с каждой фотографией.
               </p>
+              <div className="flex flex-wrap gap-4 mb-8">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Icon name="CheckCircle2" size={20} className="text-primary" />
+                  <span>Работа за 1-2 дня</span>
+                </div>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Icon name="CheckCircle2" size={20} className="text-primary" />
+                  <span>500+ выполненных работ</span>
+                </div>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Icon name="CheckCircle2" size={20} className="text-primary" />
+                  <span>Гарантия качества</span>
+                </div>
+              </div>
               <div className="flex gap-4">
-                <Button size="lg" onClick={() => scrollToSection("услуги")} className="bg-primary hover:bg-primary/90">
-                  <Icon name="ImagePlus" size={20} className="mr-2" />
-                  Наши услуги
+                <Button size="lg" onClick={() => scrollToSection("контакты")} className="bg-primary hover:bg-primary/90">
+                  <Icon name="Send" size={20} className="mr-2" />
+                  Заказать работу
                 </Button>
                 <Button size="lg" variant="outline" onClick={() => scrollToSection("портфолио")}>
                   <Icon name="Eye" size={20} className="mr-2" />
-                  Портфолио
+                  Примеры работ
                 </Button>
               </div>
             </div>
             <div className="relative animate-scale-in">
               <img
-                src="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/ffafbc56-1373-4e07-9a68-2355530cbbae.jpg"
-                alt="Пример работы"
+                src="https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/11b75ac2-3d9e-4320-b333-850367f77513.jpg"
+                alt="Профессиональная ретушь фотографий"
                 className="rounded-lg shadow-2xl w-full hover-scale"
               />
-              <div className="absolute -bottom-6 -left-6 bg-card p-4 rounded-lg shadow-xl border border-border">
-                <div className="flex items-center gap-3">
-                  <div className="bg-primary/20 p-3 rounded-full">
-                    <Icon name="Award" size={24} className="text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-heading font-semibold">500+ работ</p>
-                    <p className="text-sm text-muted-foreground">Выполнено с 2018 года</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20 px-4 bg-card/30">
+      <section id="услуги" className="py-20 px-4 bg-card/30">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient">Наши услуги</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Профессиональная обработка фотографий с индивидуальным подходом к каждой работе
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: "Frame",
+                title: "Ретушь для памятников",
+                description: "Подготовка фото для гравировки на памятниках из гранита и мрамора. Чёрно-белая обработка, удаление дефектов, идеальная чёткость изображения.",
+                price: "от 1500 ₽",
+                image: "https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/9c55fef0-9f4d-4fa7-a46b-eee251b77141.jpg"
+              },
+              {
+                icon: "Sparkles",
+                title: "Восстановление фото",
+                description: "Реставрация старых, повреждённых и выцветших снимков. Устранение царапин, заломов, восстановление утраченных деталей с сохранением оригинального стиля.",
+                price: "от 3000 ₽",
+                image: "https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/713deeaa-d3eb-4a73-b432-ed8185101ce7.jpg"
+              },
+              {
+                icon: "Video",
+                title: "Видео из фотографий",
+                description: "Создание трогательных видео-воспоминаний из фотографий с музыкой и красивыми переходами. Идеально для поминальных мероприятий.",
+                price: "от 5000 ₽",
+                image: "https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/315b0ce0-053f-46d4-ab34-86dbe259b372.jpg"
+              },
+              {
+                icon: "Gem",
+                title: "Ретушь для металлокерамики",
+                description: "Специальная обработка для нанесения на металлокерамические таблички. Учитываем особенности печати и материала.",
+                price: "от 2000 ₽",
+                image: "https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/016c71e6-eb27-4f0e-88f3-2dcace40b6bd.jpg"
+              },
+              {
+                icon: "Boxes",
+                title: "Ретушь для стекла",
+                description: "Адаптация фото для печати на стеклянных табличках. Цветная обработка с учётом прозрачности материала.",
+                price: "от 2500 ₽",
+                image: "https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/ffafbc56-1373-4e07-9a68-2355530cbbae.jpg"
+              },
+              {
+                icon: "Palette",
+                title: "Цветокоррекция портрета",
+                description: "Профессиональная цветокоррекция и улучшение качества портретных фотографий для любых целей.",
+                price: "от 1000 ₽",
+                image: "https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/adfbf611-bcfb-4ec7-b9d0-9ffd373a96d3.jpg"
+              },
+            ].map((service, index) => (
+              <Card key={index} className="overflow-hidden hover-lift">
+                <div className="h-48 overflow-hidden">
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="w-full h-full object-cover hover-scale"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                    <Icon name={service.icon as any} size={24} className="text-primary" />
+                  </div>
+                  <h3 className="text-xl font-heading font-semibold mb-3">{service.title}</h3>
+                  <p className="text-muted-foreground mb-4 leading-relaxed">{service.description}</p>
+                  <div className="flex items-center justify-between">
+                    <p className="text-2xl font-bold text-primary">{service.price}</p>
+                    <Button onClick={() => scrollToSection("контакты")} variant="ghost" size="sm">
+                      Заказать
+                      <Icon name="ArrowRight" size={16} className="ml-2" />
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="портфолио" className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient">До и После</h2>
@@ -150,326 +250,215 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="услуги" className="py-20 px-4 bg-card/30">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient">Наши услуги</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Профессиональная обработка фотографий с гарантией качества
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: "Frame",
-                title: "Ретушь для памятников",
-                description: "Подготовка фото для гравировки на памятниках. Коррекция тона, удаление дефектов, идеальная чёткость",
-                features: ["Чёрно-белая обработка", "Улучшение резкости", "Удаление царапин"],
-              },
-              {
-                icon: "Gem",
-                title: "Ретушь для металлокерамики",
-                description: "Специальная обработка фото для нанесения на металлокерамические таблички. Учёт особенностей печати и материала",
-                features: ["Адаптация под материал", "Контрастная обработка", "Оптимизация под размер"],
-              },
-              {
-                icon: "Boxes",
-                title: "Ретушь для стекла",
-                description: "Подготовка изображений для нанесения на стекло. Специальная цветокоррекция с учётом прозрачности материала",
-                features: ["Работа с прозрачностью", "Глубина цвета", "Контрастирование"],
-              },
-              {
-                icon: "Sparkles",
-                title: "Восстановление фото",
-                description: "Реставрация старых и повреждённых снимков. Устранение заломов, пятен, восстановление утраченных деталей",
-                features: ["Цветокоррекция", "Устранение повреждений", "Восстановление деталей"],
-              },
-              {
-                icon: "Video",
-                title: "Видео из фотографий",
-                description: "Создание трогательных видео-воспоминаний с музыкой и эффектами из ваших семейных фотографий",
-                features: ["Музыкальное оформление", "Плавные переходы", "Титры и подписи"],
-              },
-            ].map((service, index) => (
-              <Card key={index} className="hover-scale bg-card border-border group">
-                <CardContent className="p-6">
-                  <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                    <Icon name={service.icon as any} size={32} className="text-primary" />
-                  </div>
-                  <h3 className="text-2xl font-heading font-semibold mb-3">{service.title}</h3>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm">
-                        <Icon name="Check" size={16} className="text-secondary" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="портфолио" className="py-20 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient">Портфолио</h2>
-            <p className="text-xl text-muted-foreground">Примеры наших работ</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              "https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/016c71e6-eb27-4f0e-88f3-2dcace40b6bd.jpg",
-              "https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/2f6f4c0c-dea0-4c29-b1ad-ab391510672d.jpg",
-              "https://cdn.poehali.dev/projects/8184ca81-320c-4414-b383-65881bb46c35/files/ffafbc56-1373-4e07-9a68-2355530cbbae.jpg",
-            ].map((img, index) => (
-              <div key={index} className="relative group overflow-hidden rounded-lg hover-scale">
-                <img src={img} alt={`Работа ${index + 1}`} className="w-full h-64 object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                  <div>
-                    <p className="font-heading font-semibold text-lg">Проект #{index + 1}</p>
-                    <p className="text-sm text-muted-foreground">Профессиональная обработка</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="цены" className="py-20 px-4 bg-card/30">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient">Цены</h2>
-            <p className="text-xl text-muted-foreground">Прозрачные и честные тарифы</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Базовая",
-                price: "1 500",
-                description: "Для простых задач",
-                features: ["Базовая ретушь", "Коррекция яркости", "Удаление мелких дефектов", "1 правка бесплатно"],
-              },
-              {
-                name: "Стандарт",
-                price: "3 000",
-                description: "Самый популярный",
-                features: [
-                  "Полная ретушь",
-                  "Восстановление деталей",
-                  "Цветокоррекция",
-                  "2 правки бесплатно",
-                  "Срочное выполнение",
-                ],
-                popular: true,
-              },
-              {
-                name: "Премиум",
-                price: "5 000",
-                description: "Максимальное качество",
-                features: [
-                  "Сложная реставрация",
-                  "Восстановление лица",
-                  "Создание видео",
-                  "Неограниченные правки",
-                  "Приоритетная поддержка",
-                ],
-              },
-            ].map((plan, index) => (
-              <Card
-                key={index}
-                className={`hover-scale ${plan.popular ? "border-primary shadow-lg shadow-primary/20" : "border-border"}`}
-              >
-                <CardContent className="p-8">
-                  {plan.popular && (
-                    <div className="bg-primary text-primary-foreground text-sm font-semibold px-3 py-1 rounded-full inline-block mb-4">
-                      Популярный
-                    </div>
-                  )}
-                  <h3 className="text-2xl font-heading font-bold mb-2">{plan.name}</h3>
-                  <p className="text-muted-foreground mb-6">{plan.description}</p>
-                  <div className="mb-6">
-                    <span className="text-5xl font-heading font-bold">{plan.price}</span>
-                    <span className="text-muted-foreground ml-2">₽</span>
-                  </div>
-                  <ul className="space-y-3 mb-8">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <Icon name="Check" size={18} className="text-primary" />
-                        <span className="text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button
-                    className={`w-full ${plan.popular ? "bg-primary hover:bg-primary/90" : "bg-secondary text-secondary-foreground hover:bg-secondary/90"}`}
-                    onClick={() => scrollToSection("контакты")}
-                  >
-                    Выбрать тариф
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="отзывы" className="py-20 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient">Отзывы клиентов</h2>
-            <p className="text-xl text-muted-foreground">Что говорят о нашей работе</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                name: "Елена М.",
-                text: "Спасибо огромное за восстановление фото моей бабушки! Не думала, что можно так качественно отреставрировать старый снимок. Теперь это наша семейная реликвия.",
-                rating: 5,
-              },
-              {
-                name: "Александр П.",
-                text: "Заказывал ретушь фото для памятника отца. Работа выполнена безупречно, очень профессионально. Рекомендую всем, кто ищет качество.",
-                rating: 5,
-              },
-              {
-                name: "Мария К.",
-                text: "Создали прекрасное видео из фотографий для юбилея родителей. Все гости были в восторге! Спасибо за внимание к деталям и быструю работу.",
-                rating: 5,
-              },
-            ].map((review, index) => (
-              <Card key={index} className="hover-scale border-border">
-                <CardContent className="p-6">
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <Icon key={i} name="Star" size={18} className="text-secondary fill-secondary" />
-                    ))}
-                  </div>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">{review.text}</p>
-                  <p className="font-heading font-semibold">{review.name}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="контакты" className="py-20 px-4 bg-card/30">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient">Связаться с нами</h2>
-            <p className="text-xl text-muted-foreground">Ответим на все ваши вопросы</p>
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient">Прозрачные цены</h2>
+            <p className="text-xl text-muted-foreground">
+              Никаких скрытых платежей. Оплата после согласования результата.
+            </p>
           </div>
-          <Card className="border-border">
-            <CardContent className="p-8">
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-2xl font-heading font-bold mb-6">Напишите нам</h3>
-                  <form className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Имя</label>
-                      <input
-                        type="text"
-                        className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:ring-2 focus:ring-primary outline-none transition-all"
-                        placeholder="Ваше имя"
-                      />
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              { service: "Ретушь для памятника (гранит)", price: "1500 ₽", time: "1 день" },
+              { service: "Металлокерамика (овальная)", price: "2000 ₽", time: "1 день" },
+              { service: "Ретушь для стекла (цветная)", price: "2500 ₽", time: "1-2 дня" },
+              { service: "Восстановление фото (простое)", price: "3000 ₽", time: "2 дня" },
+              { service: "Восстановление фото (сложное)", price: "от 5000 ₽", time: "3-5 дней" },
+              { service: "Видео из 10-20 фото", price: "5000 ₽", time: "3 дня" },
+              { service: "Видео из 20-50 фото", price: "8000 ₽", time: "5 дней" },
+              { service: "Цветокоррекция портрета", price: "1000 ₽", time: "1 день" },
+            ].map((item, index) => (
+              <Card key={index} className="hover-lift">
+                <CardContent className="p-6">
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="font-heading font-semibold text-lg flex-1">{item.service}</h3>
+                    <Icon name="CheckCircle2" size={20} className="text-primary ml-2" />
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <p className="text-2xl font-bold text-primary">{item.price}</p>
+                    <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                      <Icon name="Clock" size={16} />
+                      <span>{item.time}</span>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Телефон</label>
-                      <input
-                        type="tel"
-                        className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:ring-2 focus:ring-primary outline-none transition-all"
-                        placeholder="+7 (999) 123-45-67"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Сообщение</label>
-                      <textarea
-                        rows={4}
-                        className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:ring-2 focus:ring-primary outline-none transition-all resize-none"
-                        placeholder="Опишите вашу задачу"
-                      />
-                    </div>
-                    <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
-                      <Icon name="Send" size={18} className="mr-2" />
-                      Отправить заявку
-                    </Button>
-                  </form>
-                </div>
-                <div className="space-y-6">
-                  <h3 className="text-2xl font-heading font-bold mb-6">Контакты</h3>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="mt-12 p-6 bg-primary/5 rounded-lg border border-primary/20">
+            <div className="flex gap-4 items-start">
+              <Icon name="Info" size={24} className="text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-heading font-semibold mb-2">Важная информация</h3>
+                <ul className="text-muted-foreground space-y-2">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Срочное выполнение +50% к стоимости (за 1 день)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Бесплатная корректировка в течение 7 дней</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Оплата по факту выполнения работы</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="контакты" className="py-20 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-gradient">Оставьте заявку</h2>
+            <p className="text-xl text-muted-foreground">
+              Ответим в течение 30 минут. Работаем ежедневно с 9:00 до 21:00.
+            </p>
+          </div>
+          <div className="grid lg:grid-cols-2 gap-12">
+            <Card className="hover-lift">
+              <CardContent className="p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Ваше имя</label>
+                    <Input
+                      type="text"
+                      placeholder="Введите ваше имя"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      required
+                      className="w-full"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Телефон</label>
+                    <Input
+                      type="tel"
+                      placeholder="+7 (999) 123-45-67"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      required
+                      className="w-full"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Описание работы</label>
+                    <Textarea
+                      placeholder="Расскажите, что нужно сделать с фотографией..."
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      required
+                      className="w-full min-h-[120px]"
+                    />
+                  </div>
+                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90" size="lg">
+                    <Icon name="Send" size={20} className="mr-2" />
+                    Отправить заявку
+                  </Button>
+                  <p className="text-xs text-muted-foreground text-center">
+                    Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
+                  </p>
+                </form>
+              </CardContent>
+            </Card>
+            <div className="space-y-6">
+              <Card className="hover-lift">
+                <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="bg-primary/10 p-3 rounded-lg">
+                    <div className="bg-primary/10 p-3 rounded-full">
                       <Icon name="Phone" size={24} className="text-primary" />
                     </div>
                     <div>
-                      <p className="font-semibold mb-1">Телефон</p>
-                      <p className="text-muted-foreground">+7 (999) 123-45-67</p>
+                      <h3 className="font-heading font-semibold mb-2">Телефон</h3>
+                      <a href="tel:+79991234567" className="text-lg text-primary hover:underline">
+                        +7 (999) 123-45-67
+                      </a>
                       <p className="text-sm text-muted-foreground mt-1">Ежедневно с 9:00 до 21:00</p>
                     </div>
                   </div>
+                </CardContent>
+              </Card>
+              <Card className="hover-lift">
+                <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="bg-primary/10 p-3 rounded-lg">
+                    <div className="bg-primary/10 p-3 rounded-full">
                       <Icon name="Mail" size={24} className="text-primary" />
                     </div>
                     <div>
-                      <p className="font-semibold mb-1">Email</p>
-                      <p className="text-muted-foreground">info@photomemory.ru</p>
-                      <p className="text-sm text-muted-foreground mt-1">Ответим в течение 2 часов</p>
+                      <h3 className="font-heading font-semibold mb-2">Email</h3>
+                      <a href="mailto:info@photomemory.ru" className="text-lg text-primary hover:underline">
+                        info@photomemory.ru
+                      </a>
+                      <p className="text-sm text-muted-foreground mt-1">Ответим в течение часа</p>
                     </div>
                   </div>
+                </CardContent>
+              </Card>
+              <Card className="hover-lift">
+                <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="bg-primary/10 p-3 rounded-lg">
+                    <div className="bg-primary/10 p-3 rounded-full">
                       <Icon name="MessageCircle" size={24} className="text-primary" />
                     </div>
-                    <div>
-                      <p className="font-semibold mb-1">Telegram / WhatsApp</p>
-                      <p className="text-muted-foreground">+7 (999) 123-45-67</p>
-                      <p className="text-sm text-muted-foreground mt-1">Быстрая связь 24/7</p>
+                    <div className="flex-1">
+                      <h3 className="font-heading font-semibold mb-3">Мессенджеры</h3>
+                      <div className="flex gap-3">
+                        <Button size="sm" variant="outline" className="flex-1">
+                          <Icon name="MessageCircle" size={16} className="mr-2" />
+                          WhatsApp
+                        </Button>
+                        <Button size="sm" variant="outline" className="flex-1">
+                          <Icon name="Send" size={16} className="mr-2" />
+                          Telegram
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                  <div className="pt-6 border-t border-border">
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Мы работаем по всей России. Высылайте фотографии онлайн, а готовую работу получайте в электронном виде или печатном варианте с доставкой.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </div>
       </section>
 
-      <footer className="py-12 px-4 border-t border-border">
+      <footer className="py-12 px-4 bg-card/30 border-t border-border">
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="text-xl font-heading font-bold mb-4 text-gradient">PhotoMemory</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Профессиональная ретушь и восстановление фотографий с 2018 года. Сохраняем ваши воспоминания.
+              <h3 className="text-2xl font-heading font-bold text-gradient mb-4">PhotoMemory</h3>
+              <p className="text-muted-foreground">
+                Профессиональная ретушь и восстановление фотографий с 2018 года.
               </p>
             </div>
             <div>
               <h4 className="font-heading font-semibold mb-4">Услуги</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <ul className="space-y-2 text-muted-foreground">
                 <li>Ретушь для памятников</li>
                 <li>Восстановление фото</li>
-                <li>Видео из фотографий</li>
+                <li>Создание видео</li>
+                <li>Металлокерамика и стекло</li>
               </ul>
             </div>
             <div>
               <h4 className="font-heading font-semibold mb-4">Контакты</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>+7 (999) 123-45-67</li>
-                <li>info@photomemory.ru</li>
-                <li>Работаем по всей России</li>
+              <ul className="space-y-2 text-muted-foreground">
+                <li className="flex items-center gap-2">
+                  <Icon name="Phone" size={16} />
+                  <span>+7 (999) 123-45-67</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Icon name="Mail" size={16} />
+                  <span>info@photomemory.ru</span>
+                </li>
               </ul>
             </div>
           </div>
-          <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <p>© 2024 PhotoMemory. Все права защищены.</p>
+          <div className="pt-8 border-t border-border text-center text-muted-foreground">
+            <p>&copy; 2025 PhotoMemory. Все права защищены.</p>
           </div>
         </div>
       </footer>
