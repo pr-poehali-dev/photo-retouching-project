@@ -492,8 +492,8 @@ const Index = () => {
                     </div>
                     <div>
                       <h3 className="font-heading font-semibold mb-2">Телефон</h3>
-                      <a href="tel:+79991234567" className="text-lg text-primary hover:underline">
-                        +7 (999) 123-45-67
+                      <a href="tel:+79174224484" className="text-lg text-primary hover:underline">
+                        +7 (917) 422-44-84
                       </a>
                       <p className="text-sm text-muted-foreground mt-1">Ежедневно с 9:00 до 21:00</p>
                     </div>
@@ -525,13 +525,17 @@ const Index = () => {
                     <div className="flex-1">
                       <h3 className="font-heading font-semibold mb-3">Мессенджеры</h3>
                       <div className="flex gap-3">
-                        <Button size="sm" variant="outline" className="flex-1">
-                          <Icon name="MessageCircle" size={16} className="mr-2" />
-                          WhatsApp
+                        <Button size="sm" variant="outline" className="flex-1" asChild>
+                          <a href="https://wa.me/79174224484" target="_blank" rel="noopener noreferrer">
+                            <Icon name="MessageCircle" size={16} className="mr-2" />
+                            WhatsApp
+                          </a>
                         </Button>
-                        <Button size="sm" variant="outline" className="flex-1">
-                          <Icon name="Send" size={16} className="mr-2" />
-                          Telegram
+                        <Button size="sm" variant="outline" className="flex-1" asChild>
+                          <a href="https://t.me/+79174224484" target="_blank" rel="noopener noreferrer">
+                            <Icon name="Send" size={16} className="mr-2" />
+                            Telegram
+                          </a>
                         </Button>
                       </div>
                     </div>
@@ -566,11 +570,19 @@ const Index = () => {
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <Icon name="Phone" size={16} />
-                  <span>+7 (999) 123-45-67</span>
+                  <a href="tel:+79174224484" className="hover:text-primary transition-colors">+7 (917) 422-44-84</a>
                 </li>
                 <li className="flex items-center gap-2">
                   <Icon name="Mail" size={16} />
                   <span>info@photomemory.ru</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Icon name="MessageCircle" size={16} />
+                  <a href="https://wa.me/79174224484" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">WhatsApp</a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Icon name="Send" size={16} />
+                  <a href="https://t.me/+79174224484" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Telegram</a>
                 </li>
               </ul>
             </div>
