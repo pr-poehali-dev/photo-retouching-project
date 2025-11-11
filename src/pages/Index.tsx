@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import PriceCalculator from "@/components/PriceCalculator";
 
 const Index = () => {
   const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
@@ -387,15 +388,84 @@ const Index = () => {
       </section>
 
       <section id="контакты" className="py-20 px-4 bg-muted/30">
-        <div className="container mx-auto max-w-4xl">
+        <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Заказать работу</h2>
             <p className="text-xl text-muted-foreground">
               Отправьте заявку, и мы свяжемся с вами в ближайшее время
             </p>
           </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 mb-12">
+            <Card className="border-2">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Icon name="Calculator" size={24} className="text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-bold">Калькулятор стоимости</h3>
+                </div>
+                <PriceCalculator />
+              </CardContent>
+            </Card>
+
+            <Card className="border-2">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Icon name="MessageSquare" size={24} className="text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-bold">Онлайн-чат</h3>
+                </div>
+                <div className="space-y-4">
+                  <p className="text-muted-foreground">Свяжитесь с нами прямо сейчас для быстрой консультации</p>
+                  <div className="space-y-3">
+                    <a
+                      href="https://wa.me/79991234567"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-4 bg-[#25D366]/10 hover:bg-[#25D366]/20 rounded-lg transition-colors"
+                    >
+                      <Icon name="MessageCircle" size={24} className="text-[#25D366]" />
+                      <div>
+                        <p className="font-semibold">WhatsApp</p>
+                        <p className="text-sm text-muted-foreground">Ответим в течение 5 минут</p>
+                      </div>
+                    </a>
+                    <a
+                      href="https://t.me/username"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-4 bg-[#0088cc]/10 hover:bg-[#0088cc]/20 rounded-lg transition-colors"
+                    >
+                      <Icon name="Send" size={24} className="text-[#0088cc]" />
+                      <div>
+                        <p className="font-semibold">Telegram</p>
+                        <p className="text-sm text-muted-foreground">Быстрая связь в любое время</p>
+                      </div>
+                    </a>
+                    <a
+                      href="tel:+79991234567"
+                      className="flex items-center gap-3 p-4 bg-primary/10 hover:bg-primary/20 rounded-lg transition-colors"
+                    >
+                      <Icon name="Phone" size={24} className="text-primary" />
+                      <div>
+                        <p className="font-semibold">+7 (999) 123-45-67</p>
+                        <p className="text-sm text-muted-foreground">Звоните с 9:00 до 21:00</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
           <Card>
             <CardContent className="p-8">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold mb-2">Или заполните форму заказа</h3>
+                <p className="text-muted-foreground">Прикрепите фото для бесплатной оценки</p>
+              </div>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium mb-2">Ваше имя</label>
